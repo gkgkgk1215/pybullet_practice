@@ -1,0 +1,212 @@
+<?xml version="1.0"?>
+<robot name="4dofnonplanar">
+	<link name="base_link">
+		<visual>
+			<origin xyz="0 0 0.01" rpy="0 0 0"/>
+			<geometry>
+				<box size="0.2 0.2 0.02"/>
+			</geometry>
+			<material name="cyan">
+				<color rgba="0 1.0 1.0 1.0"/>
+			</material>
+		</visual>
+
+        <inertial>
+            <mass value="0.1"/>
+			<inertia ixx="1"  ixy="0"  ixz="0" iyy="1" iyz="0" izz="1" />
+		</inertial>
+
+		<collision>
+			<origin xyz="0 0 0.01" rpy="0 0 0"/>
+			<geometry>
+				<box size="0.2 0.2 0.02"/>
+			</geometry>
+		</collision>
+	</link>
+
+	<joint name="base_link_to_cyl" type="fixed">
+		<parent link="base_link"/>
+		<child link="base_cyl"/>
+		<origin xyz="0 0 0.06"/>
+		<axis xyz="0 0 1"/>
+		<limit lower="-6.2832" upper="6.2832" effort="1000.0" velocity="0.5"/>
+	</joint>
+
+	<link name="base_cyl">
+		<visual>
+			<origin xyz="0 0 0.0" rpy="0 0 0"/>
+			<geometry>
+				<cylinder radius="0.05" length="0.1"/>
+			</geometry>
+			<material name="black">
+				<color rgba="0.0 0.0 0.0 1.0"/>
+			</material>
+		</visual>
+
+        <inertial>
+            <mass value="0.1"/>
+			<inertia ixx="1"  ixy="0"  ixz="0" iyy="1" iyz="0" izz="1" />
+		</inertial>
+
+		<collision>
+			<origin xyz="0 0 0.0" rpy="0 0 0"/>
+			<geometry>
+				<cylinder radius="0.05" length="0.1"/>
+			</geometry>
+		</collision>
+	</link>
+
+	<joint name="joint1" type="revolute">
+		<parent link="base_cyl"/>
+		<child link="first_link_cyl"/>
+		<origin xyz="0 0 0.1"/>
+		<axis xyz="0 -1 0"/>
+		<limit lower="0" upper="3.141592" effort="9999.0" velocity="9999"/>
+	</joint>
+
+	<link name="first_link_cyl">
+		<visual>
+			<origin xyz="0 0 0.0" rpy="1.57079632679 0 0"/>
+			<geometry>
+				<cylinder radius="0.05" length="0.1"/>
+			</geometry>
+			<material name="magenta">
+				<color rgba="1.0 0.0 1.0 1.0"/>
+			</material>
+		</visual>
+
+        <inertial>
+            <mass value="0.1"/>
+			<inertia ixx="1"  ixy="0"  ixz="0" iyy="1" iyz="0" izz="1" />
+		</inertial>
+
+		<collision>
+			<origin xyz="0 0 0.0" rpy="1.57079632679 0 0"/>
+			<geometry>
+				<cylinder radius="0.05" length="0.1"/>
+			</geometry>
+		</collision>
+	</link>
+
+	<joint name="first_cyl_to_stick" type="fixed">
+		<parent link="first_link_cyl"/>
+		<child link="first_link_stick"/>
+		<origin xyz="0.4 0 0"/>
+	</joint>
+
+	<link name="first_link_stick">
+		<visual>
+			<origin xyz="0 0 0" rpy="0 0 0"/>
+			<geometry>
+				<box size="0.7 0.05 0.05"/>
+			</geometry>
+			<material name="magenta">
+				<color rgba="1.0 0.0 1.0 1.0"/>
+			</material>
+		</visual>
+
+		<inertial>
+            <mass value="1"/>
+			<inertia ixx="1"  ixy="0"  ixz="0" iyy="1" iyz="0" izz="1" />
+		</inertial>
+
+		<collision>
+			<origin xyz="0 0 0" rpy="0 0 0"/>
+			<geometry>
+				<box size="0.7 0.05 0.05"/>
+			</geometry>
+		</collision>
+	</link>
+
+	<joint name="joint2" type="revolute">
+		<parent link="first_link_stick"/>
+		<child link="second_link_cyl"/>
+		<origin xyz="0.4 0 0"/>
+		<axis xyz="0 -1 0"/>
+		<limit lower="-3.141592" upper="3.141592" effort="9999.0" velocity="9999"/>
+	</joint>
+
+	<link name="second_link_cyl">
+		<visual>
+			<origin xyz="0 0 0" rpy="1.57079632679 0 0"/>
+			<geometry>
+				<cylinder radius="0.05" length="0.1"/>
+			</geometry>
+			<material name="yellow">
+				<color rgba="1.0 1.0 0.0 1.0"/>
+			</material>
+		</visual>
+
+        <inertial>
+            <mass value="0.1"/>
+			<inertia ixx="1"  ixy="0"  ixz="0" iyy="1" iyz="0" izz="1" />
+		</inertial>
+
+		<collision>
+			<origin xyz="0 0 0" rpy="1.57079632679 0 0"/>
+			<geometry>
+				<cylinder radius="0.05" length="0.1"/>
+			</geometry>
+		</collision>
+	</link>
+
+	<joint name="second_cyl_to_stick" type="fixed">
+		<parent link="second_link_cyl"/>
+		<child link="second_link_stick"/>
+		<origin xyz="0.35 0 0"/>
+	</joint>
+
+	<link name="second_link_stick">
+		<visual>
+			<origin xyz="0 0 0" rpy="0 0 0"/>
+			<geometry>
+				<box size="0.6 0.05 0.05"/>
+			</geometry>
+			<material name="yellow">
+				<color rgba="1.0 1.0 0.0 1.0"/>
+			</material>
+		</visual>
+
+		<inertial>
+	 	    <mass value="10"/>
+			<inertia ixx="10"  ixy="0"  ixz="0" iyy="10" iyz="0" izz="10" />
+		</inertial>
+
+		<collision>
+			<origin xyz="0 0 0" rpy="0 0 0"/>
+			<geometry>
+				<box size="0.6 0.05 0.05"/>
+			</geometry>
+		</collision>
+	</link>
+
+	<joint name="tcp" type="fixed">
+		<parent link="second_link_stick"/>
+		<child link="tcp"/>
+		<origin xyz="0.3 0 0"/>
+	</joint>
+
+	<link name="tcp">
+		<visual>
+			<origin xyz="0 0 0" rpy="0 1.57079632679 0"/>
+			<geometry>
+				<box size="0.01 0.01 0.1"/>
+			</geometry>
+			<material name="gray">
+				<color rgba="0.5 0.5 0.5 1.0"/>
+			</material>
+		</visual>
+
+        <inertial>
+            <mass value="0.1"/>
+			<inertia ixx="1"  ixy="0"  ixz="0" iyy="1" iyz="0" izz="1" />
+		</inertial>
+
+		<collision>
+			<origin xyz="0 0 0" rpy="0 1.57079632679 0"/>
+			<geometry>
+				<box size="0.001 0.001 0.001"/>
+			</geometry>
+		</collision>
+	</link>
+</robot>

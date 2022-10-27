@@ -18,29 +18,11 @@ cubeStartPos = [0, 0, 1]
 cubeStartOrientation = p.getQuaternionFromEuler([0,0,0])
 boxId = p.loadURDF("r2d2.urdf",cubeStartPos, cubeStartOrientation)
 
-# Camera setting
-# Get depth values using the OpenGL renderer
-width = 128
-height = 128
-view_matrix = p.computeViewMatrixFromYawPitchRoll(cameraTargetPosition=[1, -1, 1.6],
-                                                  distance=0.2,
-                                                  yaw=40,
-                                                  pitch=-40,
-                                                  roll=0,
-                                                  upAxisIndex=2)
-projection_matrix = p.computeProjectionMatrixFOV(fov=60, aspect=width / height, nearVal=0.01, farVal=20)
-
 # Perform simulation step
 for i in range(5000):
     p.stepSimulation()
     time.sleep(SAMPLING_RATE)
     cubePos, cubeOrn = p.getBasePositionAndOrientation(boxId)
-    images = p.getCameraImage(width,
-                              height,
-                              view_matrix,
-                              projection_matrix,
-                              shadow=True,
-                              renderer=p.ER_BULLET_HARDWARE_OPENGL)
 
 # Exit Simulation
 p.disconnect()

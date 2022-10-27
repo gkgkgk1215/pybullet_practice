@@ -8,8 +8,10 @@ import numpy as np
 import argparse
 import pybullet as p
 import time
+import pybullet_data
 
 gui = True
+
 
 cid = p.connect(p.SHARED_MEMORY)
 #DIRECT is much faster, but GUI shows the running gait
@@ -19,6 +21,7 @@ if (cid < 0):
   else:
     cid = p.connect(p.DIRECT)
 
+p.setAdditionalSearchPath(pybullet_data.getDataPath())
 #p.setGravity(1,2,-9.8)
 #p.setDefaultContactERP (0.4)
 p.setGravity(0, 0, -9.8)
